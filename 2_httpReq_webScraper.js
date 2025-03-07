@@ -1,12 +1,29 @@
-const http = require('https');
+const http = require("https");
 
-const req = http.request("https://www.amazon.ca/", (res) => {
+const req = http.request("https://www.amazon.ca", (res) => {
+  let data = ""; // Store the response data.
+
+  // Listen for 'data' events and accumulate chunks.
   res.on("data", (chunk) => {
-    console.log("chunk = ", chunk.toString());
+    data += chunk;
   });
+
+  // Listen for the 'end' event to know when all data has been received.
   res.on("end", () => {
-    console.log("done!!!!!!!!!!!");
+    console.log("Response fully received:", data);
+  });
+
+  // Optional: Handle errors
+  res.on("error", (err) => {
+    console.error("Error in response:", err);
   });
 });
 
-req.end()
+// Initiate the request.
+req.end();
+
+
+module.exports = {
+  req,
+  http,
+}
