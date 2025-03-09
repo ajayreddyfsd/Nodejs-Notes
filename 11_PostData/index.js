@@ -4,6 +4,8 @@ const http = require("http");
 const querystring = require("querystring");
 
 const server = http.createServer((req, res) => {
+  //below code
+  //to handle form, collect its data and parse and to do something with it
   if (req.method === "POST" && req.url === "/submit-data") {
     let dataReceived = "";
     //need to listen to data - streams and collect the data
