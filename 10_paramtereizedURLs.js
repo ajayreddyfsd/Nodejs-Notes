@@ -55,11 +55,10 @@ const server = http.createServer((req, res) => {
   //checking for valid parameter
   if (!isNaN(parameter) && parameter >= 0 && parameter <= users.length - 1) {
     res.write(JSON.stringify(users[parameter], null, 2));
+    res.end("done!");
   } else {
-    res.write(JSON.stringify({ error: "User not found" }, null, 2));
+    res.end(JSON.stringify({ error: "User not found" }, null, 2));
   }
-
-  res.end("done!");
 });
 
 server.listen(2898, () => {
