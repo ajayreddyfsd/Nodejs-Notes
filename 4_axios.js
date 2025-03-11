@@ -1,31 +1,32 @@
 const axios = require("axios");
 
-//to get data
+const axios = require("axios");
+
+// Get data
 async function getData() {
-  await axios
-    .get("https://www.google.com")
-    .then((response) => {
-      console.log(response);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+  try {
+    const response = await axios.get("https://www.google.com");
+    console.log(response.data); // `.data` contains the actual response content
+  } catch (error) {
+    console.error("Error fetching data:", error.message);
+  }
 }
 
-//to post data
+// Post data
 async function postData() {
-  await axios
-    .post("https://jsonplaceholder.typicode.com/posts", {
+  try {
+    const response = await axios.post("https://jsonplaceholder.typicode.com/posts", {
       title: "Hello Axios",
       body: "This is a test post",
       userId: 1,
-    })
-    .then((response) => {
-      console.log(response);
-    })
-    .catch((error) => {
-      console.log(error);
     });
+    console.log(response.data); // Display only meaningful data
+  } catch (error) {
+    console.error("Error posting data:", error.message);
+  }
 }
+
+postData();
+
 
 postData()
