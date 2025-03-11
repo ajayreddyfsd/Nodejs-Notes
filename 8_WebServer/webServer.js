@@ -25,3 +25,14 @@ const server = http.createServer((req, res) => {
 server.listen(3000, () => {
   console.log("listen on 3000");
 });
+
+
+//note:
+//simpler way to read html files and display
+//in 13th folder
+// // Instead of using readFile(), you could use createReadStream and pipe the data
+// const readableStream = fs.createReadStream(
+//   "C:\\Users\\ajayr\\OneDrive\\Desktop\\nodejs\\12_PostData_Form_Included\\index.html"
+// );
+// res.writeHead(200, { "Content-Type": "text/html" });
+// readableStream.pipe(res); // This pipes the file content directly to the response
