@@ -17,9 +17,34 @@ server.listen(2898, () => {
   console.log("check local host 2898");
 });
 
-//flow of execution
-//first, server is setup on that port and starts listening
-//once it is ready, its callback is placed onto CBQ and then onto CS and is exed
-//now since the server is actively listening, if it detects any request,
-// it triggers the createServer() callback, placing it onto CBQ and then onto CS
-//now js drafts a response and sends it
+//! flow of execution
+//! 🧭 Step-by-step “one-shot map” explanation
+// 1. const http = require("http")
+//    → CS loads the built-in HTTP module
+//    → gives access to createServer and other HTTP functions
+//    → CS empties
+
+// 2. http.createServer(callback)
+//    → CqllStack runs createServer
+//    → creates server object that will run callback(req, res) when request comes
+//    → no request yet → CS empties
+
+// 3. server.listen(2898, callback)
+//    → CS runs listen
+//    → WebAPI (Node) registers listener waiting for incoming HTTP requests
+//    → listen callback will run once server is ready (goes to CBQ → CS)
+//    → CS empties
+
+// 4. Browser sends request to localhost:2898
+//    → WebAPI detects request
+//    → moves server callback (req, res) to CBQ
+//    → Event loop pushes it to CS → executes server callback
+
+// 5. Inside server callback
+//    → CS executes res.writeHead(200, { "content-type": "text/plain" })
+//    → CS executes res.end("Welcome to Nodejs!!!!!!!!") → sends response to browser
+//    → CS empties
+
+// 6. Server listen callback
+//    → CBQ → CS executes → console.log("check local host 2898")
+//    → confirms server is active

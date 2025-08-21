@@ -1,3 +1,7 @@
+//! we can use axios or fetch
+// Fetch → good for SMBs (small/medium projects, hobby apps, school projects)
+// Axios → good for Enterprises (large, production-level apps where you need reliability, error handling, interceptors, timeouts, etc.)
+
 const axios = require("axios");
 
 const axios = require("axios");
@@ -15,11 +19,14 @@ async function getData() {
 // Post data
 async function postData() {
   try {
-    const response = await axios.post("https://jsonplaceholder.typicode.com/posts", {
-      title: "Hello Axios",
-      body: "This is a test post",
-      userId: 1,
-    });
+    const response = await axios.post(
+      "https://jsonplaceholder.typicode.com/posts",
+      {
+        title: "Hello Axios",
+        body: "This is a test post",
+        userId: 1,
+      }
+    );
     console.log(response.data); // Display only meaningful data
   } catch (error) {
     console.error("Error posting data:", error.message);
@@ -28,5 +35,4 @@ async function postData() {
 
 postData();
 
-
-postData()
+postData();
